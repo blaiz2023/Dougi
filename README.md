@@ -15,9 +15,8 @@ Features
 * Fit To Screen option - fit larges image to screen
 * Simple and easy to use
 * Fast, lightweight and flicker free modern user interface
-[ld]* Portable - no installation and no alteration to your operating system
+* Portable
 * Built-in help - view detailed information directly in program
 * No Internet Required - run completely offline
-[ld]* Free To Use - 100% freeware, no cost, no membership, no nags, no
 
 ![Dougi Screen Shot](dougi-screenshot.jpg?raw=true)
