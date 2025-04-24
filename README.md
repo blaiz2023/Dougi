@@ -1,22 +1,34 @@
 # Dougi
-Create quality JPEG images with ease.  Paste in an image or drag and drop and set desired quality and save.  That's it.  With a WYSIWYG (What You See Is What You Get) display, see all changes in quality and image size in realtime.
+Create quality JPEG images fast with ease.  Simply paste in an image, or drag and drop an image, set the desired quality and save.  That's it!  With a WYSIWYG (What You See Is What You Get) display, you see all changes in color and image quality in realtime.  No need to guess about JPEG quality any more.
 
-Don't guess the quality required to produce a clear, crisp JPEG image, try it before you save it.
+<img src="images/dougi-screenshot.jpg">
 
-Features
+# Features
 * WYSIWYG (What You See Is What You Get) display
-* Preview option - view JPEG image in web browser
-* Quality range 5% - 100%  (view changes in realtime)
-* Options: Mirror, Flip, Grey, Sepia, Noise, Invert and Soften
-* Realtime Information: Dimensions, JPEG Size, Colors
-* Open image formats: PNG, GIF, JPG, JIF, JPEG, BMP and TEA
+* Manual Quality (5-100%): View changes to JPEG image in realtime
+* Automatic Quality: Low, Fair, Good, High and Best
+* Size: Enforce an optional maximum JPEG file size limit (5-4,000 KB) 
+* Image Adjustments: Mirror, Flip, Grey, Sepia, Noise, Invert and Soften
+* Realtime Information: Dimensions, JPEG file size and Color Count
+* Open image formats: PNG, GIF, JPG, JIF, JPEG, TJ32, BMP, ICO, CUR, ANI, TEA and IMG32
 * Save image formats: JPG, JIF and JPEG
 * Screen Color: Default, Grey, Light Grey, Black, White, Off White and Custom
-* Fit To Screen option - fit larges image to screen
+* Fit To Screen: Force image to fit the screen for overview
+* Batch Conversion: Drag and drop 2 or more images to batch convert
+* Batch Convert Options: Save JPG, JPEG and JIF formats
+* Show Batch Conversion folder after convert
+* Max: Toggle fullscreen mode
+* Preview: View JPEG image in your web browser
 * Simple and easy to use
-* Fast, lightweight and flicker free modern user interface
-* Portable
-* Built-in help - view detailed information directly in program
-* No Internet Required - run completely offline
+* Built-in Help
+* App is portable with no installation (works in a folder) and runs offline without the internet
 
-![Dougi Screen Shot](dougi-screenshot.jpg?raw=true)
+# Download
+<a href="src/dougi.exe">dougi.exe</a> - windows all
+
+# Images
+<img src="images/dougi-screenshot2.jpg">
+
+<img src="images/dougi-screenshot3.jpg">
+
+<img src="images/dougi-screenshot4.jpg">
