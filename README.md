@@ -3,6 +3,8 @@ Create quality JPEG images fast with ease.  Simply paste in an image, or drag an
 
 <img src="images/dougi-animated.gif">
 
+<video src="images/animated5.mp4.mov"></video>
+
 # Features
 * WYSIWYG (What You See Is What You Get) display
 * Manual Quality (5-100%): View changes to JPEG image in realtime
