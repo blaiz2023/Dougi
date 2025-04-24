@@ -4,7 +4,7 @@ Create quality JPEG images fast with ease.  Simply paste in an image, or drag an
 
 [Video](images/dougi-animated5.mp4)
 
-<video><source src="https://rawcdn.githack.com/blaiz2023/Dougi/e6124ae0959cbbf08d15129d48fae62c8f40b9d6/images/dougi-animated4.mp4" type="video/mp4"></video>
+<video><source src="images/dougi-animated5.mp4" type="video/mp4"></video>
 <img src="images/dougi-animated.gif">
 
 # Features
