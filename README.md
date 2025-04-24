@@ -1,7 +1,7 @@
 # Dougi
 Create quality JPEG images fast with ease.  Simply paste in an image, or drag and drop an image, set the desired quality and save.  That's it!  With a WYSIWYG (What You See Is What You Get) display, you see all changes in color and image quality in realtime.  No need to guess about JPEG quality any more.
 
-<img src="images/dougi-screenshot.jpg">
+<img src="images/dougi-animated.gif">
 
 # Features
 * WYSIWYG (What You See Is What You Get) display
