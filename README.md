@@ -4,7 +4,8 @@ Create quality JPEG images fast with ease.  Simply paste in an image, or drag an
 
 
 
-https://github.com/user-attachments/assets/03fbb430-0594-4f37-bdb6-c4a6c957f86b
+https://github.com/user-attachments/assets/6faaf6ff-edd6-4ed4-8525-0b70234a3148
+
 
 
 
