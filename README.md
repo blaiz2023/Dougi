@@ -1,7 +1,11 @@
 # Dougi
 Create quality JPEG images fast with ease.  Simply paste in an image, or drag and drop an image, set the desired quality and save.  Done.  With a realtime WYSIWYG (What You See Is What You Get) preview, you see image quality changes as you go.  Never guess the right JPEG quality again.
 
-<video src="https://github.com/blaiz2023/Dougi/blob/main/images/dougi-animated5.mp4" width="300" /></video>
+
+
+https://github.com/user-attachments/assets/42b3a04b-4af8-45ae-b7b5-0edb8547149d
+
+
 <img src="images/dougi-animated.gif">
 
 # Features
