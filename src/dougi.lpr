@@ -1,16 +1,27 @@
 program Dougi;
 
+{$mode delphi}{$H+}
+
 uses
-  Forms,
-  main in 'main.pas',
-  gossgui in 'gossgui.pas',
-  gossdat in 'gossdat.pas',
-  gossimg in 'gossimg.pas',
-  gossio in 'gossio.pas',
-  gossnet in 'gossnet.pas',
-  gossroot in 'gossroot.pas',
-  gosssnd in 'gosssnd.pas',
-  gosswin in 'gosswin.pas';
+  {$IFDEF UNIX}
+  cthreads,
+  {$ENDIF}
+  {$IFDEF HASAMIGA}
+  athreads,
+  {$ENDIF}
+  Interfaces,// this includes the LCL widgetset
+  forms,
+  main,
+  gossgui,
+  gossdat,
+  gossimg,
+  gossio,
+  gossnet,
+  gossroot,
+  gosssnd,
+  gosswin;
+  { you can add units after this }
+
 
 
 //Important Note: For Borland Delphi 3: If an error of "Can't read form data" or "Resource name not found" occurs during app load or

@@ -685,15 +685,6 @@ type
      end;
 
 //system objects ---------------------------------------------------------------
-{$ifdef d3}
-  TForm1 = class(TForm)//placeholder to keep Delphi 3 happy
-  private
-
-  public
-
-  end;
-{$endif}
-
 //tbasicapp
    tbasicapp=class(tobjectex)
    private
@@ -6330,15 +6321,9 @@ procedure app__realtime;
 procedure app__realtimeSYNC;//internally called by system procs - 19apr2022
 
 
-{$ifdef d3}
-var
-  Form1: TForm1;
-{$endif}
-
 implementation
 
 uses main;
-{$ifdef d3}{$R *.DFM}{$endif}
 
 
 //start-stop procs -------------------------------------------------------------
