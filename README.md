@@ -10,7 +10,7 @@ Create quality JPEG images fast with ease.  Simply paste in an image, or drag an
 * Size: Enforce an optional maximum JPEG file size limit (5-4,000 KB) 
 * Image Adjustments: Mirror, Flip, Grey, Sepia, Noise, Invert and Soften
 * Realtime Information: Dimensions, JPEG file size and Color Count
-* Open image formats: PNG, GIF, JPG, JIF, JPEG, TJ32, BMP, ICO, CUR, ANI, TEA and IMG32
+* Open image formats: PNG, GIF, JPG, JIF, JPEG, TJ32, BMP, DIB, ICO, CUR, ANI, TEA, TGA, PPM, PGM, PBM, PNM, XBM, and IMG32
 * Save image formats: JPG, JIF and JPEG
 * Copy image to Clipboard as mime/type JPG/PNG and paste directly into html code
 * Screen Color: Default, Grey, Light Grey, Black, White, Off White and Custom
@@ -18,10 +18,7 @@ Create quality JPEG images fast with ease.  Simply paste in an image, or drag an
 * Batch Conversion: Drag and drop 2 or more images to batch convert
 * Batch Convert Options: Save JPG, JPEG and JIF formats
 * Show Batch Conversion folder after convert
-* Max: Toggle fullscreen mode
 * Preview: View JPEG image in your web browser
-* Simple and easy to use
-* Built-in Help
 * Options Window - Easily change app color, font, and settings
 * Portable
 * Smart Source Code (Borland Delphi 3 and Lazarus 2)
