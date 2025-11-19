@@ -29,10 +29,10 @@ uses gossroot, {$ifdef gui}gossgui,{$endif} {$ifdef snd}gosssnd,{$endif} gosswin
 //##
 //## ==========================================================================================================================================================================================================================
 //## Library.................. app code (main.pas)
-//## Version.................. 1.00.655 (+5)
+//## Version.................. 1.00.672 (+11)
 //## Items.................... -
-//## Last Updated ............ 16jun2025, 28may2025, 24apr2025, 25mar2025, 05dec2024, 29nov2024, 24nov2024, 26apr2022
-//## Lines of Code............ 1,600+
+//## Last Updated ............ 19nov2025, 16jun2025, 28may2025, 24apr2025, 25mar2025, 05dec2024, 29nov2024, 24nov2024, 26apr2022
+//## Lines of Code............ 1,700+
 //##
 //## main.pas ................ app code
 //## gossroot.pas ............ console/gui app startup and control
@@ -49,7 +49,7 @@ uses gossroot, {$ifdef gui}gossgui,{$endif} {$ifdef snd}gosssnd,{$endif} gosswin
 //## ==========================================================================================================================================================================================================================
 //## | Name                   | Hierarchy         | Version   | Date        | Update history / brief description of function
 //## |------------------------|-------------------|-----------|-------------|--------------------------------------------------------
-//## | tapp                   | tbasicapp         | 1.00.650  | 16jun2025   | Create JPEG images with Quality - 28may2025, 05may2025, 24apr2025, 26mar2025: pastefit, 05dec2024, 24nov2024, 26apr2022
+//## | tapp                   | tbasicapp         | 1.00.660  | 19nov2025   | Create JPEG images with Quality - 16jun2025, 28may2025, 05may2025, 24apr2025, 26mar2025: pastefit, 05dec2024, 24nov2024, 26apr2022
 //## ==========================================================================================================================================================================================================================
 //## Performance Note:
 //##
@@ -69,6 +69,7 @@ type
 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxx//sssssssssssssssssssssssssssssssssss
    tapp=class(tbasicapp)
    private
+
     iscreen:tbasiccontrol;
     ibuffer,ibuffer2:tbasicimage;
     ioutdata:tstr8;
@@ -80,6 +81,8 @@ type
     iinfotimer,ibuffertimer2,itimer100,itimer250,itimer500,itimerslow:comp;
     isizeref,ilastref,isyncref,isyncref2,ibufferref,ilowopenfilename,ilastfilename,ilastfilename2,iinforef,ilasterror,isettingsref:string;
     ibatchlist:tdynamicstring;
+
+    procedure xcopybase64(dext:string);//19nov2025
     procedure xcmd(sender:tobject;xcode:longint;xcode2:string);
     procedure __onclick(sender:tobject);
     procedure __ontimer(sender:tobject); override;
@@ -123,9 +126,11 @@ type
     procedure setsoften(x:boolean);
     function xshift:longint;
     function yshift:longint;
+
     //batch support
     procedure xbatchlist;
     function xbatchfolder:string;
+
     //.options
     function sizeBYTES:longint;
     property size:boolean read getsize write setsize;
@@ -136,10 +141,13 @@ type
     property noise:boolean read getnoise write setnoise;
     property invert:boolean read getinvert write setinvert;
     property soften:boolean read getsoften write setsoften;
+
    public
+
     //create
     constructor create; virtual;
     destructor destroy; override;
+
    end;
 
 //info procs -------------------------------------------------------------------
@@ -189,13 +197,15 @@ xname:=strlow(xname);
 
 //get
 if      (xname='slogan')              then result:=info__app('name')+' by Blaiz Enterprises'
-else if (xname='width')               then result:='1300'
+else if (xname='width')               then result:='1350'
 else if (xname='height')              then result:='900'
-else if (xname='ver')                 then result:='1.00.655'
-else if (xname='date')                then result:='16jun2025'
+else if (xname='language')            then result:='english-australia'//for Clyde - 14sep2025
+else if (xname='codepage')            then result:='1252'//for Clyde
+else if (xname='ver')                 then result:='1.00.672'
+else if (xname='date')                then result:='19nov2025'
 else if (xname='name')                then result:='Dougi'
 else if (xname='web.name')            then result:='dougi'//used for website name
-else if (xname='des')                 then result:='Create quality JPEG images with ease'
+else if (xname='des')                 then result:='Create quality JPEG images fast with ease'
 else if (xname='infoline')            then result:=info__app('name')+#32+info__app('des')+' v'+app__info('ver')+' (c) 1997-'+low__yearstr(2024)+' Blaiz Enterprises'
 else if (xname='size')                then result:=low__b(io__filesize64(io__exename),true)
 else if (xname='diskname')            then result:=io__extractfilename(io__exename)
@@ -203,7 +213,7 @@ else if (xname='service.name')        then result:=info__app('name')
 else if (xname='service.displayname') then result:=info__app('service.name')
 else if (xname='service.description') then result:=info__app('des')
 else if (xname='new.instance')        then result:='1'//1=allow new instance, else=only one instance of app permitted
-else if (xname='screensizelimit%')    then result:='95'//95% of screen area
+else if (xname='screensizelimit%')    then result:='98'//98% of screen area
 else if (xname='realtimehelp')        then result:='0'//1=show realtime help, 0=don't
 else if (xname='hint')                then result:='1'//1=show hints, 0=don't
 
@@ -216,7 +226,6 @@ else if (xname='author.name')         then result:='Blaiz Enterprises'
 else if (xname='portal.name')         then result:='Blaiz Enterprises - Portal'
 else if (xname='portal.tep')          then result:=intstr32(tepBE20)
 //.software
-else if (xname='software.tep')        then result:=intstr32(low__aorb(tepNext20,tepIcon20,sizeof(program_icon20h)>=2))
 else if (xname='url.software')        then result:='https://www.blaizenterprises.com/'+info__app('web.name')+'.html'
 else if (xname='url.software.zip')    then result:='https://www.blaizenterprises.com/'+info__app('web.name')+'.zip'
 //.urls
@@ -234,45 +243,6 @@ else if (xname='license')             then result:='MIT License'
 else if (xname='copyright')           then result:='© 1997-'+low__yearstr(2025)+' Blaiz Enterprises'
 else if (xname='splash.web')          then result:='Web Portal: '+app__info('url.portal')
 
-
-//.program values -> defaults and fallback values
-else if (xname='focused.opacity')     then result:='255'//range: 50..255
-else if (xname='unfocused.opacity')   then result:='255'//range: 30..255
-else if (xname='opacity.speed')       then result:='9'//range: 1..10 (1=slowest, 10=fastest)
-
-else if (xname='head.center')         then result:='0'//1=center window title, 0=left align window title
-else if (xname='head.align')          then result:='1'//0=left, 1=center, 2=right -> head based toolbar alignment
-else if (xname='high.above')          then result:='0'//highlight above, 0=off, 1=on
-
-else if (xname='modern')              then result:='1'//range: 0=legacy, 1=modern
-else if (xname='scroll.size')         then result:='20'//scrollbar size: 5..72
-
-else if (xname='bordersize')          then result:='7'//0..72 - frame size
-else if (xname='sparkle')             then result:='7'//0..20 - default sparkle level -> set 1st time app is run, range: 0-20 where 0=off, 10=medium and 20=heavy)
-else if (xname='brightness')          then result:='100'//60..130 - default brightness
-
-else if (xname='ecomode')             then result:='0'//1=economy mode on, 0=economy mode off
-else if (xname='emboss')              then result:='0'//0=off, 1=on
-else if (xname='color.name')          then result:='black 8'//white 5'//default color scheme name
-else if (xname='back.name')           then result:=''//default background name
-else if (xname='frame.name')          then result:='narrow'//default frame name
-else if (xname='frame.max')           then result:='1'//0=no frame when maximised, 1=frame when maximised
-//.font
-else if (xname='font.name')           then result:='Arial'//default GUI font name
-else if (xname='font.size')           then result:='10'//default GUI font size
-//.font2
-else if (xname='font2.use')           then result:='1'//0=don't use, 1=use this font for text boxes (special cases)
-else if (xname='font2.name')          then result:='Courier New'
-else if (xname='font2.size')          then result:='12'
-//.help
-else if (xname='help.maxwidth')       then result:='500'//pixels - right column when help shown
-
-//.paid/store support
-else if (xname='paid')                then result:='0'//desktop paid status ->  programpaid -> 0=free, 1..N=paid - also works inconjunction with "system_storeapp" and it's cost value to determine PAID status is used within help etc
-else if (xname='paid.store')          then result:='1'//store paid status
-//.anti-tamper programcode checker - updated dual version (program EXE must be secured using "Blaiz Tools") - 11oct2022
-else if (xname='check.mode')          then result:='-91234356'//disable check
-//else if (xname='check.mode')          then result:='234897'//enable check
 else
    begin
    //nil
@@ -521,11 +491,14 @@ add('Open',tepOpen20,0,'open','Image|Open image from file');
 add('Save As',tepSaveAs20,0,'saveas','Image|Save image to file');
 add('Save',tepSave20,0,'save','Image|Save image to file without prompting');
 add('Menu',tepMenu20,0,'menu','Menu|Show menu');
-add('Settings',tepSettings20,0,'settings','Settings|Show settings');
 add('-',tepNone,0,'sep1','');
-add('Copy',tepCopy20,0,'copy','Image|Copy image to Clipboard');
-add('Paste',tepPaste20,0,'paste','Image|Paste image from Clipboard');
-add('Paste Fit',tepPaste20,0,'pastefit','Image|Paste to fit image from Clipboard');
+
+add('Copy',tepCopy20,0,'copy','Copy Image|Copy image to Clipboard');
+add('JPG',tepCopy20,0,'copy.b64.jpg','Copy Image|Copy image to Clipboard as base64 encoded text in mime/type format JPG. Image data can be inserted into HTML code, or viewed by pasting it into your browser''s address bar.');
+add('PNG',tepCopy20,0,'copy.b64.png','Copy Image|Copy image to Clipboard as base64 encoded text in mime/type format PNG. Image data can be inserted into HTML code, or viewed by pasting it into your browser''s address bar.');
+
+add('Paste',tepPaste20,0,'paste','Paste Image|Paste image from Clipboard');
+add('Paste Fit',tepPaste20,0,'pastefit','Paste Image|Paste to fit image from Clipboard');
 end;
 
 //.screen
@@ -1028,6 +1001,7 @@ else if (xcode2='saveas') then
          end;
       end;
    end
+
 else if (xcode2='saveas2') then
    begin
    if not xempty then
@@ -1038,15 +1012,27 @@ else if (xcode2='saveas2') then
          end;
       end;
    end
+
 else if (xcode2='copy') then
    begin
    if (not xempty) and (not clip__copyimage(ibuffer2)) then goto skipend;
    end
+
+else if (xcode2='copy.b64.jpg') then
+   begin
+   if (not xempty) then xcopybase64('jpg');
+   end
+else if (xcode2='copy.b64.png') then
+   begin
+   if (not xempty) then xcopybase64('png');
+   end
+
 else if (xcode2='paste') then
    begin
    bol1:=clip__pasteimage(ibuffer);
    if bol1 then xbuffer2 else goto skipend;
    end
+
 else if (xcode2='pastefit') then//26mar2025
    begin
    a:=misimg32(1,1);
@@ -1058,6 +1044,7 @@ else if (xcode2='pastefit') then//26mar2025
       end
    else goto skipend;
    end
+
 else if (strcopy1(xcode2,1,12)='screenstyle.') then
    begin
    iscreenstyle:=frcrange32(strint(strcopy1(xcode2,13,length(xcode2))),0,iscreenstyleCount-1);
@@ -1089,6 +1076,66 @@ xfilter;
 xsyncinfo;
 if not xresult then gui.poperror('',e);
 except;end;
+end;
+
+procedure tapp.xcopybase64(dext:string);//19nov2025
+label
+   skipend;
+var
+   xresult:boolean;
+   a:tbasicimage;
+   d:tstr8;
+   dtype,e:string;
+begin
+
+//defaults
+xresult :=false;
+d       :=nil;
+a       :=nil;
+e       :=gecTaskfailed;
+
+try
+//check
+if xempty then exit;
+
+//get
+d:=str__new8;
+
+if strmatch(dext,'gif') or strmatch(dext,'png') or strmatch(dext,'jpg')  then
+   begin
+
+   dtype  :=net__mimefind(dext);
+   a      :=misimg32(1,1);
+   if not mis__copy(ibuffer2,a)            then goto skipend;
+   if not mis__todata(a,@d,dext,e)         then goto skipend;
+
+   end
+else
+   begin
+
+   e:=gecUnsupportedFormat;
+   goto skipend;
+
+   end;
+
+if not str__tob64(@d,@d,0)                 then goto skipend;
+if not d.sins('data:'+dtype+';base64,',0)  then goto skipend;
+if not clip__copytext(d.text)              then goto skipend;
+
+//successful
+xresult:=true;
+gui.popstatus(low__mbAUTO2(d.len,1,true)+' of text copied to Clipboard',1);
+
+skipend:
+except;end;
+
+//free
+str__free(@d);
+freeobj(@a);
+
+//show error
+if (not xresult) and (app__gui<>nil) then app__gui.poperror('',e);
+
 end;
 
 procedure tapp.__ontimer(sender:tobject);//._ontimer
@@ -1420,7 +1467,11 @@ acanpaste:=clip__canpasteimage;
 rootwin.xhead.benabled2['preview']:=not aempty;//03sep2021
 rootwin.xhead.benabled2['save']:=xcansave;
 rootwin.xhead.benabled2['saveas']:=not aempty;
+
 rootwin.xhead.benabled2['copy']:=not aempty;
+rootwin.xhead.benabled2['copy.b64.jpg']:=not aempty;//19nov2025
+rootwin.xhead.benabled2['copy.b64.png']:=not aempty;//19nov2025
+
 rootwin.xhead.benabled2['paste']:=acanpaste;
 rootwin.xhead.benabled2['pastefit']:=acanpaste;
 rootwin.xhead.bvisible2['sep1']:=rootwin.xhead.bvisible2['copy'] or rootwin.xhead.bvisible2['paste'] or rootwin.xhead.bvisible2['pastefit'];
@@ -1532,7 +1583,7 @@ procedure tapp.xonshowmenuFill1(sender:tobject;xstyle:string;xmenudata:tstr8;var
 var
    aempty,aimgok:boolean;
 begin
-try
+
 //check
 if zznil(xmenudata,5000) then exit;
 
@@ -1540,17 +1591,16 @@ if zznil(xmenudata,5000) then exit;
 xmenuname:='main-app.'+xstyle;
 aempty:=xempty;
 aimgok:=not aempty;
+
 //menu
-if (xstyle='menu') then
+if (xstyle='menu') or (xstyle='settings') then
    begin
+
    //file
    low__menutitle(xmenudata,tepnone,'File Options','File options');
    low__menuitem2(xmenudata,tepSave20,'Save','Save Image|Save image to file without prompting','save',100,aknone,xcansave);
    low__menuitem2(xmenudata,tepSave20,'Save A Copy...','Save Image|Save a copy of image to file','saveas2',100,aknone,aimgok);
-   end
-//settings
-else if (xstyle='settings') then
-   begin
+
    //screen color
    low__menutitle(xmenudata,tepnone,'Screen Color','Screen color');
    low__menuitem2(xmenudata,tep__tick(iscreenstyle=0),'Window (Default)','Screen Color|Window color','screenstyle.0',100,aknone,true);
@@ -1573,7 +1623,7 @@ else if (xstyle='settings') then
    low__menuitem2(xmenudata,tep__yes(ifit),'Fit to window','Image Preview|Fit large images to window','fit',100,aknone,true);
    low__menuitem2(xmenudata,tep__yes(rootwin.xhead.bvisible2['save']),'Show "Save" link','Settings|Show "Save" link on toolbar','show.save',100,aknone,true);
    end;
-except;end;
+
 end;
 
 function tapp.xonshowmenuClick1(sender:tbasiccontrol;xstyle:string;xcode:longint;xcode2:string;xtepcolor:longint):boolean;

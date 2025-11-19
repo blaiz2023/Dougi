@@ -6,7 +6,7 @@
  <BuildModes Active="Default"/>
  <Units>
  <Unit>
-  <Filename Value="Dougi.lpr"/>
+  <Filename Value="dougi.lpr"/>
   <IsPartOfProject Value="True"/>
   <IsVisibleTab Value="True"/>
   <EditorIndex Value="1"/>
