@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>dougi</id>
-    <version>1.0.655</version>
+    <version>1.0.672</version>
     <title>Dougi</title>
     <authors>Blaiz Enterprises</authors>
     <owners>Blaiz Enterprises</owners>
@@ -12,7 +12,7 @@
     <iconUrl>https://rawcdn.githack.com/blaiz2023/Dougi/ae6df714e434fed38e922a3ee8d1682fd35da2fa/images/dougi-256.png</iconUrl>
     <description>Create quality JPEG images fast with ease.  Simply paste in an image, or drag and drop an image, set the desired quality and save.  Done.  With a realtime WYSIWYG (What You See Is What You Get) preview, you see image quality changes as you go.  Never guess the right JPEG quality again.
 
-![Dougi v1.0.655 Screenshot](https://rawcdn.githack.com/blaiz2023/Dougi/b3347a39d1547a1e153a75735aeee48ee1038f99/images/dougi-screenshot.jpg)
+![Dougi v1.0.672 Screenshot](https://rawcdn.githack.com/blaiz2023/Dougi/bef85207fc95a6884aa4fdadf59e3173963b58ff/images/dougi-screenshot.jpg)
 
 Features
 * WYSIWYG (What You See Is What You Get) display
@@ -21,19 +21,20 @@ Features
 * Size: Enforce an optional maximum JPEG file size limit (5-4,000 KB) 
 * Image Adjustments: Mirror, Flip, Grey, Sepia, Noise, Invert and Soften
 * Realtime Information: Dimensions, JPEG file size and Color Count
-* Open image formats: PNG, GIF, JPG, JIF, JPEG, TJ32, BMP, ICO, CUR, ANI, TEA and IMG32
+* Open image formats: PNG, GIF, JPG, JIF, JPEG, TJ32, BMP, DIB, ICO, CUR, ANI, TEA, TGA, PPM, PGM, PBM, PNM, XBM, and IMG32
 * Save image formats: JPG, JIF and JPEG
+* Copy image to Clipboard as mime/type JPG/PNG and paste directly into html code
 * Screen Color: Default, Grey, Light Grey, Black, White, Off White and Custom
 * Fit To Screen: Force image to fit the screen for overview
 * Batch Conversion: Drag and drop 2 or more images to batch convert
 * Batch Convert Options: Save JPG, JPEG and JIF formats
 * Show Batch Conversion folder after convert
 * Preview: View JPEG image in your web browser
-* Options Window - Easily change app color, font and settings
+* Options Window - Easily change app color, font, and settings
 * Portable</description>
     <summary>Create quality JPEG images fast with ease.  Simply paste in an image, or drag and drop an image, set the desired quality and save.</summary>
     <copyright>2025 Blaiz Enterprises</copyright>
-    <tags>create quality jpeg images fast with ease simply paste in an image or drag and drop set the desired save</tags>
+    <tags>dougi create set jpg jpeg image quality fast simple</tags>
     <projectSourceUrl>https://github.com/blaiz2023/Dougi</projectSourceUrl>
     <packageSourceUrl>https://github.com/blaiz2023/Dougi/tree/main/choco</packageSourceUrl>
     <docsUrl>https://www.blaizenterprises.com/dougi.html#help</docsUrl>
